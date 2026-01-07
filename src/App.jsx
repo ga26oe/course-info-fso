@@ -26,6 +26,8 @@ const Content = (props) => {
   return (
     <div>
       <Part name={props.course.parts[0].name}  exercises={props.course.parts[0].exercises} />
+      <Part name={props.course.parts[1].name}  exercises={props.course.parts[1].exercises} />
+      <Part name={props.course.parts[2].name}  exercises={props.course.parts[2].exercises} />
     </div>
   );
 };
@@ -67,8 +69,9 @@ const App = () => {
   return (
     <>
       <Header course={course} />
-      <Content parts = {course}/>
-      <Total parts = {course}/>
+      <Content course = {course}/>
+      <Total course = {course} />
+      
     </>
   );
 };
