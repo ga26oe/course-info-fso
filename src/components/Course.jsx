@@ -1,33 +1,14 @@
-const CourseList = ({course}) => {
-  return (
-    <div>
-  <Header course={course} />
-    
+const Header = ({ name }) => {
+  return <h1>{name}</h1>;
+};
 
-    </div>
-    
-  )
-}
-
-const Header = ({course}) => {
-  return (
-    <div>
-      {course.map((course, index) => (
-        <li key={index}>
-          <h1>{course.name}</h1>
-        </li>
-      ))}
-    </div>
-  )
-}
-
-const Part = ({props}) => {
+const Part = ({ name, exercises }) => {
   console.log("Part Component Props =");
-  console.log(props.name, props.exercises);
+  console.log(name, exercises);
   return (
     <div>
       <p>
-        {props.name} {props.exercises}
+        {name} {exercises}
       </p>
     </div>
   );
@@ -38,8 +19,10 @@ const Content = ({ parts }) => {
   console.log(parts);
   return (
     <div>
-      {parts.map((part) => (
-        <Part name={part.name} exercises={part.exercises} />
+      {parts.map((part, index) => (
+        <div key={index}>
+          <Part name={part.name} exercises={part.exercises} />
+        </div>
       ))}
     </div>
   );
@@ -52,20 +35,23 @@ const Total = ({ parts }) => {
 
   return (
     <>
-      <div> Total Number of Exercises {total}</div>
+      <h3> Total Number of Exercises {total}</h3>
     </>
   );
 };
 
-const Course = ({courses}) => {
-  console.log("Course Component Props");
-  console.log(courses);
+const CourseList = ({ courses }) => {
   return (
-    <>
-      <CourseList course={courses} />
-
-    </>
+    <div>
+      {courses.map((course, index) => (
+        <div key={index}>
+          <Header name={course.name} />
+          <Content parts={course.parts} />
+          <Total parts={course.parts}/>
+        </div>
+      ))}
+    </div>
   );
 };
 
-export default Course;
+export default CourseList;
